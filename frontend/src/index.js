@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
+import 'bootstrap/dist/css/bootstrap.css'
+import {
+    Row, Col, Card, CardBody, CardTitle,CardText
+} from 'reactstrap'
 
 class ContentFeed extends React.Component {
     constructor(){
@@ -24,16 +28,34 @@ class ContentFeed extends React.Component {
         return(
             <ul>
                 {this.state.items.map(function(item, index){
-                    return <div key={index + 1}>
-                            <h1>{item.title}</h1>
-                            <p>{item.description}</p>
-                        </div>
+                    return (
+                        <ContentItem item={item} key={index + 1} />
+                    )
                 })}
             </ul>
         )
     }
 }
-
+class ContentItem extends React.Component{
+    render(){
+        return(
+            <Row className="ContentItem">
+                <Col xs="6">
+                    <Card>
+                        <CardBody>
+                            <CardTitle>
+                                {this.props.item.title}
+                            </CardTitle>
+                            <CardText>
+                                {this.props.item.description}
+                            </CardText>
+                        </CardBody>
+                    </Card>
+                </Col>
+            </Row>
+        )
+    }
+}
 ReactDOM.render(
     <ContentFeed/>,
     document.getElementById('root')
